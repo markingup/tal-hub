@@ -60,7 +60,6 @@ export default function OnboardingPage() {
       // Update the user's profile
       const { error } = await supabase
         .from('profiles')
-        // @ts-expect-error - Temporary fix for TypeScript inference issue
         .update({
           full_name: formData.fullName,
           phone: formData.phone,

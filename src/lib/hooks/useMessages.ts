@@ -98,7 +98,7 @@ export function useMessages(caseId: string) {
     // Cleanup subscription on unmount
     return () => {
       if (subscriptionRef.current) {
-        subscriptionRef.current.unsubscribe()
+        supabase.removeChannel(subscriptionRef.current)
       }
     }
   }, [caseId, queryClient])

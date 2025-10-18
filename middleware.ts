@@ -96,6 +96,26 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // Handle dashboard route logic - check if user needs onboarding
+  if (request.nextUrl.pathname.startsWith('/dashboard') && user) {
+    try {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('full_name, phone')
+        .eq('id', user.id)
+        .single()
+
+      // If profile is incomplete, redirect to onboarding
+      if (!profile?.full_name || !profile?.phone) {
+        return NextResponse.redirect(new URL('/onboarding', request.url))
+      }
+    } catch (error) {
+      logger.error('Error checking profile for dashboard access', error)
+      // If there's an error, redirect to onboarding to be safe
+      return NextResponse.redirect(new URL('/onboarding', request.url))
+    }
+  }
+
   return response
 }
 

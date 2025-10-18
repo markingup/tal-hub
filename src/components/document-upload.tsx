@@ -163,7 +163,9 @@ export function DocumentUpload({ caseId, onUploadComplete }: DocumentUploadProps
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault()
-                getRootProps().onClick?.()
+                // Trigger file input click
+                const input = e.currentTarget.querySelector('input[type="file"]') as HTMLInputElement
+                input?.click()
               }
             }}
           >

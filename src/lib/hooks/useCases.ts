@@ -228,10 +228,14 @@ export function useCaseStats() {
       }
 
       // Count cases by status
+      const validStatuses = ['active', 'draft', 'closed', 'archived'] as const
       const stats = data?.reduce((acc, caseItem) => {
         // Validate that caseItem has a valid status before incrementing
         if (caseItem && typeof caseItem.status === 'string' && caseItem.status.trim() !== '') {
-          acc[caseItem.status] = (acc[caseItem.status] || 0) + 1
+          // Only count valid status values
+          if (validStatuses.includes(caseItem.status as any)) {
+            acc[caseItem.status] = (acc[caseItem.status] || 0) + 1
+          }
         }
         return acc
       }, {} as Record<string, number>) || {}

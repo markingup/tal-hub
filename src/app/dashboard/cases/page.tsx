@@ -283,7 +283,9 @@ export default function CasesPage() {
                 Manage and track your legal cases and projects
               </p>
             </div>
-            <NewCaseDialog />
+            <Button onClick={() => setShowNewCaseDialog(true)}>
+              Create Case
+            </Button>
           </div>
         </div>
         <CaseCardSkeleton count={6} />
@@ -303,7 +305,9 @@ export default function CasesPage() {
                 Manage and track your legal cases and projects
               </p>
             </div>
-            <NewCaseDialog />
+            <Button onClick={() => setShowNewCaseDialog(true)}>
+              Create Case
+            </Button>
           </div>
         </div>
         <Card>
