@@ -155,7 +155,7 @@ export function useDeleteDocument() {
 }
 
 // Utility function to determine file type from filename
-function getFileType(filename: string): string {
+function getFileType(filename: string): 'lease' | 'notice' | 'photo' | 'invoice' | 'email' | 'audio' | 'video' | 'other' {
   // Handle edge cases: empty filename, no extension, or just a dot
   if (!filename || filename.trim() === '' || filename === '.') {
     return 'other'
@@ -169,21 +169,21 @@ function getFileType(filename: string): string {
     return 'other'
   }
   
-  const typeMap: Record<string, string> = {
-    // Documents
-    'pdf': 'document',
-    'doc': 'document',
-    'docx': 'document',
-    'txt': 'document',
-    'rtf': 'document',
+  const typeMap: Record<string, 'lease' | 'notice' | 'photo' | 'invoice' | 'email' | 'audio' | 'video' | 'other'> = {
+    // Legal documents
+    'pdf': 'notice',
+    'doc': 'notice',
+    'docx': 'notice',
+    'txt': 'notice',
+    'rtf': 'notice',
     
     // Images
-    'jpg': 'image',
-    'jpeg': 'image',
-    'png': 'image',
-    'gif': 'image',
-    'webp': 'image',
-    'svg': 'image',
+    'jpg': 'photo',
+    'jpeg': 'photo',
+    'png': 'photo',
+    'gif': 'photo',
+    'webp': 'photo',
+    'svg': 'photo',
     
     // Audio
     'mp3': 'audio',
@@ -197,12 +197,14 @@ function getFileType(filename: string): string {
     'mov': 'video',
     'wmv': 'video',
     
-    // Archives
-    'zip': 'archive',
-    'rar': 'archive',
-    '7z': 'archive',
-    'tar': 'archive',
-    'gz': 'archive',
+    // Email files
+    'eml': 'email',
+    'msg': 'email',
+    
+    // Invoice/billing documents
+    'xls': 'invoice',
+    'xlsx': 'invoice',
+    'csv': 'invoice',
   }
   
   return typeMap[extension] || 'other'

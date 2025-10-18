@@ -173,7 +173,7 @@ export function useUpcomingDeadlines() {
         `)
         .eq('is_done', false)
         .gte('due_date', now.toISOString())
-        .lt('due_date', fortyEightHoursFromNow.toISOString())
+        .lte('due_date', fortyEightHoursFromNow.toISOString())
         .order('due_date', { ascending: true })
 
       if (error) {

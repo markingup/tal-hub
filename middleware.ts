@@ -56,12 +56,12 @@ export async function middleware(request: NextRequest) {
   const authRoutes = ['/auth/sign-in', '/auth/callback']
   
   const isProtectedRoute = protectedRoutes.some(route => 
-    request.nextUrl.pathname.startsWith(route)
+    request.nextUrl.pathname === route || request.nextUrl.pathname.startsWith(route + '/')
   )
   const isAuthRoute = authRoutes.some(route => 
-    request.nextUrl.pathname.startsWith(route)
+    request.nextUrl.pathname === route || request.nextUrl.pathname.startsWith(route + '/')
   )
-  const isOnboardingRoute = request.nextUrl.pathname.startsWith('/onboarding')
+  const isOnboardingRoute = request.nextUrl.pathname === '/onboarding' || request.nextUrl.pathname.startsWith('/onboarding/')
 
   // Redirect logic
   if (isProtectedRoute && !user) {
@@ -74,6 +74,28 @@ export async function middleware(request: NextRequest) {
   if (isAuthRoute && user) {
     // Redirect to dashboard if accessing auth routes while authenticated
     return NextResponse.redirect(new URL('/dashboard', request.url))
+  }
+
+  // Handle dashboard route logic - check if user needs onboarding FIRST
+  if (request.nextUrl.pathname === '/dashboard' || request.nextUrl.pathname.startsWith('/dashboard/')) {
+    if (user) {
+      try {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('full_name, phone')
+          .eq('id', user.id)
+          .single()
+
+        // If profile is incomplete, redirect to onboarding
+        if (!profile?.full_name || !profile?.phone) {
+          return NextResponse.redirect(new URL('/onboarding', request.url))
+        }
+      } catch (error) {
+        logger.error('Error checking profile for dashboard access', error)
+        // If there's an error, redirect to onboarding to be safe
+        return NextResponse.redirect(new URL('/onboarding', request.url))
+      }
+    }
   }
 
   // Handle onboarding route logic
@@ -92,27 +114,8 @@ export async function middleware(request: NextRequest) {
       }
     } catch (error) {
       logger.error('Error checking profile in middleware', error)
-      // If there's an error, allow access to onboarding
-    }
-  }
-
-  // Handle dashboard route logic - check if user needs onboarding
-  if (request.nextUrl.pathname.startsWith('/dashboard') && user) {
-    try {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('full_name, phone')
-        .eq('id', user.id)
-        .single()
-
-      // If profile is incomplete, redirect to onboarding
-      if (!profile?.full_name || !profile?.phone) {
-        return NextResponse.redirect(new URL('/onboarding', request.url))
-      }
-    } catch (error) {
-      logger.error('Error checking profile for dashboard access', error)
-      // If there's an error, redirect to onboarding to be safe
-      return NextResponse.redirect(new URL('/onboarding', request.url))
+      // If there's an error, allow access to onboarding to avoid loops
+      // Don't redirect on error to prevent infinite loops
     }
   }
 

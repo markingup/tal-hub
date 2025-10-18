@@ -149,7 +149,7 @@ async function createTestCase(userId) {
     console.log('\n🎉 Test setup completed!')
     console.log('You can now:')
     console.log('1. Go to http://localhost:3000/auth/sign-in')
-    console.log(`2. Sign in with email: test@example.com`)
+    console.log(`2. Sign in with email: ${testEmail}`)
     console.log('3. Password: testpassword')
     console.log('4. You should see your test case in the dashboard')
     

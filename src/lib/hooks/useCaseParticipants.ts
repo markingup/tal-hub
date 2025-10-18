@@ -104,9 +104,8 @@ export function useAddParticipant() {
       let userId: string
 
       if (!existingProfile) {
-        // For now, we cannot create profiles for users who don't exist in Supabase Auth
-        // This should be handled by an invitation system that creates auth users first
-        throw new Error(`User with email ${email} does not exist. Please invite them to create an account first.`)
+        // User doesn't exist - provide clear guidance on invitation flow
+        throw new Error(`User with email ${email} does not exist. Please use the invitation system to send them an invite to join the case.`)
       } else {
         userId = existingProfile.id
       }
@@ -231,18 +230,38 @@ export function useSendInvitation() {
       email: string
       role: CaseParticipant['role']
     }): Promise<void> => {
-      // For now, we'll create a simple invitation link
-      // In a real implementation, this would integrate with an email service
-      const invitationLink = `${window.location.origin}/dashboard/cases/${caseId}?invite=true&email=${encodeURIComponent(email)}&role=${role}`
+      const supabase = createClient()
+      
+      // Get current user
+      const { data: { user }, error: userError } = await supabase.auth.getUser()
+      if (userError || !user) {
+        throw new Error('User not authenticated')
+      }
+
+      // Create invitation record in database
+      const { error: inviteError } = await supabase
+        .from('case_invitations')
+        .insert({
+          case_id: caseId,
+          email: email,
+          role: role,
+          invited_by: user.id,
+          expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days
+        })
+
+      if (inviteError) {
+        throw new Error(`Failed to create invitation: ${inviteError.message}`)
+      }
+
+      // Create invitation link
+      const invitationLink = `${window.location.origin}/auth/sign-up?invite=${caseId}&email=${encodeURIComponent(email)}&role=${role}`
       
       // TODO: Integrate with email service (SendGrid, AWS SES, etc.)
-      
-      // Simulate email sending
+      // For now, we'll simulate email sending and show the link
       await new Promise(resolve => setTimeout(resolve, 1000))
       
-      // For demo purposes, we'll show the link in console
-      // In production, this would send an actual email
-      alert(`Invitation sent to ${email}!\n\nInvitation link: ${invitationLink}`)
+      // Show invitation link for demo purposes
+      alert(`Invitation created for ${email}!\n\nInvitation link: ${invitationLink}\n\nNote: In production, this would be sent via email automatically.`)
     },
   })
 }

@@ -160,14 +160,6 @@ export function DocumentUpload({ caseId, onUploadComplete }: DocumentUploadProps
             role="button"
             tabIndex={0}
             aria-label="Upload files by dragging and dropping or clicking to select"
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault()
-                // Trigger file input click
-                const input = e.currentTarget.querySelector('input[type="file"]') as HTMLInputElement
-                input?.click()
-              }
-            }}
           >
             <input {...getInputProps()} aria-label="File input" />
             <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />

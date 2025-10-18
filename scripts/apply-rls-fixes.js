@@ -92,9 +92,11 @@ async function checkExecSqlFunction() {
       .limit(1)
 
     if (error || !data || data.length === 0) {
-      console.log('⚠️  exec_sql function not found. Creating it...')
-      
-      const createFunctionSQL = `
+      console.log('⚠️  exec_sql function not found.')
+      console.log('📋 Manual setup required:')
+      console.log('1. Go to Supabase Dashboard → SQL Editor')
+      console.log('2. Execute this SQL to create the function:')
+      console.log(`
         CREATE OR REPLACE FUNCTION exec_sql(sql text)
         RETURNS void
         LANGUAGE plpgsql
@@ -104,16 +106,9 @@ async function checkExecSqlFunction() {
           EXECUTE sql;
         END;
         $$;
-      `
-      
-      const { error: createError } = await supabase.rpc('exec_sql', { sql: createFunctionSQL })
-      
-      if (createError) {
-        console.error('❌ Failed to create exec_sql function:', createError.message)
-        return false
-      }
-      
-      console.log('✅ exec_sql function created successfully')
+      `)
+      console.log('3. Then run this script again')
+      return false
     }
     
     return true

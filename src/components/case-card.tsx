@@ -57,10 +57,6 @@ export function CaseCard({ case: caseItem, onView, onEdit }: CaseCardProps) {
     })
   }
 
-  const formatTypeLabel = (type: CaseType) => {
-    return type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
-  }
-
   return (
     <Card className="hover:shadow-md transition-shadow duration-200">
       <CardHeader className="pb-3">
@@ -69,7 +65,7 @@ export function CaseCard({ case: caseItem, onView, onEdit }: CaseCardProps) {
             <CardTitle className="text-lg truncate">{caseItem.title}</CardTitle>
             <CardDescription className="flex items-center gap-2">
               <TypeIcon className="h-4 w-4" />
-              <span>{formatTypeLabel(caseItem.type)}</span>
+              <span>{type.label}</span>
             </CardDescription>
           </div>
           <Badge variant="secondary" className={`${status.bgColor} ${status.color} border-0`}>
