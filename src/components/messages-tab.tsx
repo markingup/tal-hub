@@ -15,7 +15,7 @@
 
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { MessageList } from '@/components/message-list'
 import { MessageInput } from '@/components/message-input'
@@ -30,14 +30,14 @@ export function MessagesTab({ caseId }: MessagesTabProps) {
   const [currentUserId, setCurrentUserId] = useState<string | undefined>()
 
   // Get current user ID on mount
-  useState(() => {
+  useEffect(() => {
     const getCurrentUser = async () => {
       const supabase = createClient()
       const { data: { user } } = await supabase.auth.getUser()
       setCurrentUserId(user?.id)
     }
     getCurrentUser()
-  })
+  }, [])
 
   const handleFileUpload = async (file: File) => {
     try {

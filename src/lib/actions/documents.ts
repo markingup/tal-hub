@@ -43,23 +43,27 @@ export async function generateDownloadUrl(documentId: string) {
       throw new Error('Document not found')
     }
 
-    // Verify user has access to this case
-    const { data: participant, error: participantError } = await supabase
-      .from('case_participants')
-      .select('user_id')
-      .eq('case_id', document.case_id)
-      .eq('user_id', user.id)
-      .single()
-
-    // Check if user is admin
+    // Check if user is admin first
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
       .eq('id', user.id)
       .single()
 
-    if (participantError && profile?.role !== 'admin') {
-      throw new Error('Access denied')
+    const isAdmin = profile?.role === 'admin'
+
+    // If not admin, verify user has access to this case
+    if (!isAdmin) {
+      const { data: participant, error: participantError } = await supabase
+        .from('case_participants')
+        .select('user_id')
+        .eq('case_id', document.case_id)
+        .eq('user_id', user.id)
+        .single()
+
+      if (participantError) {
+        throw new Error('Access denied')
+      }
     }
 
     // Generate signed URL (valid for 1 hour)

@@ -104,24 +104,9 @@ export function useAddParticipant() {
       let userId: string
 
       if (!existingProfile) {
-        // Create new profile for the email
-        const { data: newProfile, error: profileError } = await supabase
-          .from('profiles')
-          .insert({
-            id: crypto.randomUUID(), // Generate UUID for new user
-            email,
-            role: 'tenant', // Default role
-            full_name: null,
-            phone: null,
-          })
-          .select('id')
-          .single()
-
-        if (profileError) {
-          throw new Error(`Failed to create user profile: ${profileError.message}`)
-        }
-
-        userId = newProfile.id
+        // For now, we cannot create profiles for users who don't exist in Supabase Auth
+        // This should be handled by an invitation system that creates auth users first
+        throw new Error(`User with email ${email} does not exist. Please invite them to create an account first.`)
       } else {
         userId = existingProfile.id
       }

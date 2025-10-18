@@ -228,8 +228,11 @@ export function useCaseStats() {
       }
 
       // Count cases by status
-      const stats = data?.reduce((acc, case_) => {
-        acc[case_.status] = (acc[case_.status] || 0) + 1
+      const stats = data?.reduce((acc, caseItem) => {
+        // Validate that caseItem has a valid status before incrementing
+        if (caseItem && typeof caseItem.status === 'string' && caseItem.status.trim() !== '') {
+          acc[caseItem.status] = (acc[caseItem.status] || 0) + 1
+        }
         return acc
       }, {} as Record<string, number>) || {}
 

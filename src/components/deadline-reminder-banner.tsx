@@ -57,7 +57,7 @@ export function DeadlineReminderBanner() {
     return `${diffDays} days`
   }
 
-  const getUrgencyColor = (deadline: any) => {
+  const getUrgencyColor = (deadline: { due_date: string; is_done: boolean }) => {
     const status = getDeadlineStatus(deadline.due_date, deadline.is_done)
     switch (status) {
       case 'overdue':
@@ -69,7 +69,7 @@ export function DeadlineReminderBanner() {
     }
   }
 
-  const getUrgencyIcon = (deadline: any) => {
+  const getUrgencyIcon = (deadline: { due_date: string; is_done: boolean }) => {
     const status = getDeadlineStatus(deadline.due_date, deadline.is_done)
     switch (status) {
       case 'overdue':

@@ -48,8 +48,8 @@ export function CaseHeader({ caseData }: { caseData: Case }) {
         <div className="space-y-2">
           <h1 className="text-3xl font-bold">{caseData.title}</h1>
           <div className="flex items-center gap-4">
-            <Badge variant="secondary" className={`${statusConfig[caseData.status].color} ${statusConfig[caseData.status].textColor} border-0`}>
-              {statusConfig[caseData.status].label}
+            <Badge variant="secondary" className={`${statusConfig[caseData.status]?.color || 'bg-gray-500'} ${statusConfig[caseData.status]?.textColor || 'text-gray-600'} border-0`}>
+              {statusConfig[caseData.status]?.label || 'Unknown'}
             </Badge>
             <span className="text-muted-foreground">
               {typeConfig[caseData.type]}

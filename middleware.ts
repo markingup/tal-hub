@@ -92,7 +92,7 @@ export async function middleware(request: NextRequest) {
       }
     } catch (error) {
       logger.error('Error checking profile in middleware', error)
-      // If there&apos;s an error, allow access to onboarding
+      // If there's an error, allow access to onboarding
     }
   }
 

@@ -156,7 +156,18 @@ export function useDeleteDocument() {
 
 // Utility function to determine file type from filename
 function getFileType(filename: string): string {
-  const extension = filename.toLowerCase().split('.').pop()
+  // Handle edge cases: empty filename, no extension, or just a dot
+  if (!filename || filename.trim() === '' || filename === '.') {
+    return 'other'
+  }
+  
+  const parts = filename.toLowerCase().split('.')
+  const extension = parts.length > 1 ? parts.pop() : ''
+  
+  // Handle case where extension is empty or undefined
+  if (!extension) {
+    return 'other'
+  }
   
   const typeMap: Record<string, string> = {
     // Documents
@@ -194,7 +205,7 @@ function getFileType(filename: string): string {
     'gz': 'archive',
   }
   
-  return typeMap[extension || ''] || 'other'
+  return typeMap[extension] || 'other'
 }
 
 // Utility function to format file size
