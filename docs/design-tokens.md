@@ -30,6 +30,12 @@ font-size: var(--font-size-base);
 font-weight: var(--font-weight-medium);
 ```
 
+### Font Consistency Guidelines
+- **Always use the base font family**: All text should use `var(--font-family-base)` which provides Public Sans with fallbacks
+- **Avoid font-family overrides**: Do not use `font-mono`, `font-serif`, or custom font families unless specifically required for code display
+- **Use Tailwind font classes**: Prefer `font-medium`, `font-semibold`, `font-bold` over custom CSS
+- **Consistent weights**: Use only the defined weights (400, 500, 700) for consistency
+
 ## Color Tokens
 
 ### Primary Colors

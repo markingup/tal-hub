@@ -48,11 +48,10 @@
       "subtitle": "Streamline your legal case management",
       "description": "A comprehensive platform for managing legal cases, documents, and deadlines.",
       "hero": {
-        "headline": "Manage your TAL case with confidence.",
-        "subheadline": "TALHub helps tenants, landlords, and lawyers in Quebec organize their housing cases, deadlines, and documents — all in one place.",
-        "ctaPrimary": "Get Started Free",
-        "ctaSecondary": "Watch a 1-minute demo",
-        "trustBadges": ["Data stored in Canada", "RLS secure by design", "Not affiliated with the TAL — built for clarity."]
+        "headline": "Your TAL case, organized and under control.",
+        "subheadline": "Manage documents, deadlines, and messages — all in one secure, Quebec-based platform.",
+        "ctaPrimary": "Start Free",
+        "trustBadges": ["Secure by design", "Hosted in Canada"]
       },
       "problem": {
         "headline": "Housing disputes shouldn't feel impossible to manage.",
@@ -106,7 +105,6 @@
         "headline": "Ready to manage your TAL case?",
         "subheadline": "Join Quebec's most trusted housing dispute management platform.",
         "ctaPrimary": "Start Free Trial",
-        "ctaSecondary": "Schedule Demo",
         "trustNote": "No credit card required • Free for first case • Cancel anytime"
       }
     },

@@ -12,12 +12,12 @@ import {
   Scale, 
   MessageSquare, 
   Users, 
-  Shield, 
-  Play,
   ClipboardList,
   Calendar,
   FileText,
-  ShieldCheck
+  ShieldCheck,
+  Shield,
+  MapPin
 } from "lucide-react";
 import { useAuth } from "@/components/auth-provider";
 import { useI18n } from "@/components/i18n-provider";
@@ -65,35 +65,39 @@ export default function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative py-20 px-4 bg-gradient-to-b from-background to-muted/20">
+      <section className="relative py-20 px-4 bg-gradient-to-b from-background via-blue-50/30 to-muted/20">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center space-y-8">
             <div className="space-y-4">
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-foreground via-blue-700 to-foreground bg-clip-text text-transparent break-words leading-tight pb-2">
                 {t('pages.home.hero.headline')}
               </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed break-words">
                 {t('pages.home.hero.subheadline')}
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="text-lg px-8 py-6" onClick={() => router.push('/auth/sign-in')}>
+            <div className="flex justify-center items-center px-4">
+              <Button 
+                size="lg" 
+                className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 w-full sm:w-auto"
+                onClick={() => router.push('/auth/sign-in')}
+              >
                 {t('pages.home.hero.ctaPrimary')}
-              </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-6">
-                <Play className="h-5 w-5 mr-2" />
-                {t('pages.home.hero.ctaSecondary')}
               </Button>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-4 mt-8">
-              {Array.isArray(t('pages.home.hero.trustBadges')) && (t('pages.home.hero.trustBadges') as string[]).map((badge: string, index: number) => (
-                <Badge key={index} variant="secondary" className="text-sm">
-                  <Shield className="h-3 w-3 mr-1" />
-                  {badge}
-                </Badge>
-              ))}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-8 px-4">
+              {Array.isArray(t('pages.home.hero.trustBadges')) && (t('pages.home.hero.trustBadges') as string[]).map((badge: string, index: number) => {
+                const icons = [Shield, MapPin];
+                const Icon = icons[index] || Shield;
+                return (
+                  <Badge key={index} variant="secondary" className="text-xs sm:text-sm bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 transition-colors duration-200 whitespace-nowrap">
+                    <Icon className="h-3 w-3 mr-1 flex-shrink-0" />
+                    <span className="truncate">{badge}</span>
+                  </Badge>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -182,7 +186,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex justify-center items-center">
             <Button 
               size="lg" 
               variant="outline" 
@@ -190,13 +194,6 @@ export default function Home() {
               onClick={() => router.push('/auth/sign-in')}
             >
               {t('pages.home.cta.ctaPrimary')}
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="text-lg px-8 py-6 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-            >
-              {t('pages.home.cta.ctaSecondary')}
             </Button>
           </div>
 

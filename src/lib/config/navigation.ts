@@ -6,7 +6,9 @@ import {
   Info, 
   HelpCircle,
   Shield,
-  FileText as TermsIcon
+  FileText as TermsIcon,
+  LogIn,
+  UserPlus
 } from 'lucide-react'
 
 /**
@@ -39,6 +41,7 @@ export interface NavigationConfig {
   public: NavigationItem[]
   authenticated: NavigationItem[]
   mobile: NavigationItem[]
+  auth: NavigationItem[]
 }
 
 export const navigationConfig: NavigationConfig = {
@@ -114,6 +117,26 @@ export const navigationConfig: NavigationConfig = {
       mobile: true,
       description: 'Terms of service'
     }
+  ],
+  auth: [
+    {
+      name: 'Sign In',
+      nameKey: 'common.signIn',
+      href: '/auth/sign-in',
+      icon: LogIn,
+      public: true,
+      mobile: true,
+      description: 'Sign in to your account'
+    },
+    {
+      name: 'Sign Up',
+      nameKey: 'common.signUp',
+      href: '/auth/sign-up',
+      icon: UserPlus,
+      public: true,
+      mobile: true,
+      description: 'Create a new account'
+    }
   ]
 }
 
@@ -145,6 +168,9 @@ export function getMobileNavigationItems(isAuthenticated: boolean): NavigationIt
   
   if (isAuthenticated) {
     items.push(...navigationConfig.authenticated.filter(item => item.mobile))
+  } else {
+    // Show auth items for unauthenticated users
+    items.push(...navigationConfig.auth.filter(item => item.mobile))
   }
   
   // Always include mobile-specific items

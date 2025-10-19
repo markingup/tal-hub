@@ -48,11 +48,10 @@
       "subtitle": "Rationalisez votre gestion de dossiers juridiques",
       "description": "Une plateforme complète pour gérer vos dossiers juridiques, documents et échéances.",
       "hero": {
-        "headline": "Gérez votre dossier TAL en toute confiance.",
-        "subheadline": "TALHub aide les locataires, propriétaires et avocats du Québec à organiser leurs dossiers de logement, échéances et documents — tout en un seul endroit.",
+        "headline": "Votre dossier TAL, organisé et sous contrôle.",
+        "subheadline": "Gérez documents, échéances et messages — tout sur une plateforme sécurisée basée au Québec.",
         "ctaPrimary": "Commencer gratuitement",
-        "ctaSecondary": "Voir une démo d'1 minute",
-        "trustBadges": ["Données stockées au Canada", "Sécurité RLS par conception", "Non affilié au TAL — conçu pour la clarté."]
+        "trustBadges": ["Sécurisé par conception", "Hébergé au Canada"]
       },
       "problem": {
         "headline": "Les différends de logement ne devraient pas sembler impossibles à gérer.",
@@ -106,7 +105,6 @@
         "headline": "Prêt à gérer votre dossier TAL ?",
         "subheadline": "Rejoignez la plateforme de gestion de différends de logement la plus fiable du Québec.",
         "ctaPrimary": "Commencer l'essai gratuit",
-        "ctaSecondary": "Planifier une démo",
         "trustNote": "Aucune carte de crédit requise • Gratuit pour le premier dossier • Annulez à tout moment"
       }
     },
