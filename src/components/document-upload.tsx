@@ -162,14 +162,14 @@ export function DocumentUpload({ caseId, onUploadComplete }: DocumentUploadProps
             aria-label="Upload files by dragging and dropping or clicking to select"
           >
             <input {...getInputProps()} aria-label="File input" />
-            <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+            <Upload className="h-12 w-12 mx-auto mb-4 text-text-secondary" />
             <p className="text-lg font-medium mb-2">
               {isDragActive ? 'Drop files here' : 'Drag & drop files here'}
             </p>
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-sm text-text-secondary mb-4">
               or click to select files
             </p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-text-secondary">
               PDF, DOC, DOCX, TXT, Images, Audio, Video, Archives (max 50MB each)
             </p>
           </div>
@@ -205,7 +205,7 @@ export function DocumentUpload({ caseId, onUploadComplete }: DocumentUploadProps
                     <p className="text-sm font-medium truncate">
                       {uploadFile.file.name}
                     </p>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-text-secondary">
                       {formatFileSize(uploadFile.file.size)}
                     </p>
                     
@@ -242,7 +242,7 @@ export function DocumentUpload({ caseId, onUploadComplete }: DocumentUploadProps
                     
                     {uploadFile.status === 'success' && (
                       <div className="min-h-[44px] min-w-[44px] flex items-center justify-center">
-                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <CheckCircle className="h-4 w-4 text-success" />
                       </div>
                     )}
                     

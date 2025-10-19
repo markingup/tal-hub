@@ -1,0 +1,148 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "about": "À propos",
+    "help": "Aide",
+    "dashboard": "Tableau de bord",
+    "myCases": "Mes dossiers",
+    "privacy": "Confidentialité",
+    "terms": "Conditions"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "close": "Fermer",
+    "submit": "Soumettre",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "view": "Voir",
+    "download": "Télécharger",
+    "upload": "Téléverser",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "signUp": "S'inscrire",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "language": "Langue",
+    "theme": "Thème",
+    "dark": "Sombre",
+    "light": "Clair",
+    "system": "Système"
+  },
+  "brand": {
+    "name": "Tal Hub",
+    "tagline": "Plateforme de gestion de dossiers juridiques"
+  },
+  "pages": {
+    "home": {
+      "title": "Bienvenue sur Tal Hub",
+      "subtitle": "Rationalisez votre gestion de dossiers juridiques",
+      "description": "Une plateforme complète pour gérer vos dossiers juridiques, documents et échéances.",
+      "hero": {
+        "headline": "Gérez votre dossier TAL en toute confiance.",
+        "subheadline": "TALHub aide les locataires, propriétaires et avocats du Québec à organiser leurs dossiers de logement, échéances et documents — tout en un seul endroit.",
+        "ctaPrimary": "Commencer gratuitement",
+        "ctaSecondary": "Voir une démo d'1 minute",
+        "trustBadges": ["Données stockées au Canada", "Sécurité RLS par conception", "Non affilié au TAL — conçu pour la clarté."]
+      },
+      "problem": {
+        "headline": "Les différends de logement ne devraient pas sembler impossibles à gérer.",
+        "subcopy": "Le processus TAL peut être stressant, désorganisé et confus. Nous le rendons plus facile pour tous les participants.",
+        "cards": [
+          {
+            "title": "Locataires",
+            "description": "Suivez votre dossier, téléversez des preuves et obtenez des conseils à chaque étape."
+          },
+          {
+            "title": "Propriétaires",
+            "description": "Respectez la conformité, gérez les communications et atteignez des règlements équitables plus rapidement."
+          },
+          {
+            "title": "Avocats",
+            "description": "Centralisez les dossiers clients, automatisez les documents et soyez payé à temps."
+          }
+        ]
+      },
+      "features": {
+        "headline": "Conçu pour le processus TAL — du début à la fin",
+        "subheadline": "TALHub organise automatiquement chaque document, message et échéance, afin que vous puissiez vous concentrer sur la résolution de votre dossier — pas sur la gestion de la paperasse.",
+        "cards": [
+          {
+            "title": "Gestion de dossiers",
+            "description": "Consultez vos audiences, échéances et statut de dossier dans un tableau de bord clair — mis à jour en temps réel."
+          },
+          {
+            "title": "Messagerie sécurisée",
+            "description": "Communiquez en toute sécurité avec les locataires, propriétaires ou représentants via des fils de discussion cryptés et traçables."
+          },
+          {
+            "title": "Suivi des échéances",
+            "description": "Recevez des rappels automatiques pour les dates d'audience, dépôts et suivis — ne manquez plus jamais une étape importante."
+          },
+          {
+            "title": "Collaboration multi-parties",
+            "description": "Invitez facilement tous les participants — locataires, propriétaires, avocats ou témoins — à partager et examiner les informations en toute sécurité."
+          },
+          {
+            "title": "Protection des documents",
+            "description": "Stockez et partagez des fichiers sensibles avec un cryptage de niveau entreprise et des contrôles d'accès clairs."
+          },
+          {
+            "title": "Prêt pour la conformité",
+            "description": "Générez des rapports et maintenez des dossiers précis qui respectent les exigences de dépôt et de preuve du TAL."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Prêt à gérer votre dossier TAL ?",
+        "subheadline": "Rejoignez la plateforme de gestion de différends de logement la plus fiable du Québec.",
+        "ctaPrimary": "Commencer l'essai gratuit",
+        "ctaSecondary": "Planifier une démo",
+        "trustNote": "Aucune carte de crédit requise • Gratuit pour le premier dossier • Annulez à tout moment"
+      }
+    },
+    "about": {
+      "title": "À propos de Tal Hub",
+      "description": "En savoir plus sur notre plateforme et notre mission."
+    },
+    "help": {
+      "title": "Aide et support",
+      "description": "Obtenez de l'aide et du support pour utiliser Tal Hub."
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "description": "Notre politique de confidentialité et nos pratiques de protection des données."
+    },
+    "terms": {
+      "title": "Conditions d'utilisation",
+      "description": "Conditions et termes d'utilisation de Tal Hub."
+    },
+    "dashboard": {
+      "title": "Tableau de bord",
+      "subtitle": "Aperçu de vos dossiers et activités"
+    },
+    "cases": {
+      "title": "Mes dossiers",
+      "subtitle": "Gérez vos dossiers juridiques",
+      "newCase": "Nouveau dossier",
+      "noCases": "Aucun dossier trouvé",
+      "createFirst": "Créez votre premier dossier pour commencer"
+    }
+  },
+  "errors": {
+    "generic": "Quelque chose s'est mal passé. Veuillez réessayer.",
+    "network": "Erreur réseau. Veuillez vérifier votre connexion.",
+    "unauthorized": "Vous n'êtes pas autorisé à effectuer cette action.",
+    "notFound": "La ressource demandée n'a pas été trouvée.",
+    "validation": "Veuillez vérifier votre saisie et réessayer."
+  }
+}

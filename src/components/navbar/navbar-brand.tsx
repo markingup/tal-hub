@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { navigationConfig } from '@/lib/config/navigation'
+import { useI18n } from '@/components/i18n-provider'
 
 /**
  * NavbarBrand Component
@@ -15,13 +18,15 @@ interface NavbarBrandProps {
 }
 
 export function NavbarBrand({ className = '' }: NavbarBrandProps) {
+  const { t } = useI18n()
+  
   return (
     <Link 
       href={navigationConfig.brand.href}
       className={`flex items-center space-x-2 font-bold hover:opacity-80 transition-opacity ${className}`}
     >
       <span className="text-xl">
-        {navigationConfig.brand.name}
+        {t('brand.name')}
       </span>
     </Link>
   )

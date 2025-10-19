@@ -105,13 +105,13 @@ export function DeadlineItem({ deadline }: DeadlineItemProps) {
   const getStatusIcon = () => {
     switch (status) {
       case 'overdue':
-        return <AlertTriangle className="h-4 w-4 text-red-600" />
+        return <AlertTriangle className="h-4 w-4 text-error" />
       case 'due-soon':
-        return <Clock className="h-4 w-4 text-yellow-600" />
+        return <Clock className="h-4 w-4 text-warning" />
       case 'completed':
-        return <CheckCircle className="h-4 w-4 text-gray-600" />
+        return <CheckCircle className="h-4 w-4 text-text-secondary" />
       default:
-        return <CalendarIcon className="h-4 w-4 text-blue-600" />
+        return <CalendarIcon className="h-4 w-4 text-accent" />
     }
   }
 
@@ -134,13 +134,13 @@ export function DeadlineItem({ deadline }: DeadlineItemProps) {
               {getStatusIcon()}
               <h4 className={cn(
                 'font-medium truncate',
-                deadline.is_done && 'line-through text-gray-500'
+                deadline.is_done && 'line-through text-text-secondary'
               )}>
                 {deadline.title}
               </h4>
             </div>
             <div className="flex items-center gap-2 mt-1">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-text-secondary">
                 Due: {format(new Date(deadline.due_date), 'MMM d, yyyy')}
               </p>
               <Badge variant="outline" className="text-xs">
@@ -149,7 +149,7 @@ export function DeadlineItem({ deadline }: DeadlineItemProps) {
                  status === 'completed' ? 'Completed' : 'Upcoming'}
               </Badge>
             </div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-xs text-text-secondary mt-1">
               Created by {deadline.profile.full_name || deadline.profile.email}
             </p>
           </div>
@@ -205,7 +205,7 @@ export function DeadlineItem({ deadline }: DeadlineItemProps) {
                     variant="outline"
                     className={cn(
                       'w-full justify-start text-left font-normal',
-                      !selectedDate && 'text-muted-foreground'
+                      !selectedDate && 'text-text-secondary'
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />

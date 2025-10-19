@@ -1,0 +1,148 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "help": "Help",
+    "dashboard": "Dashboard",
+    "myCases": "My Cases",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "close": "Close",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "view": "View",
+    "download": "Download",
+    "upload": "Upload",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signUp": "Sign Up",
+    "profile": "Profile",
+    "settings": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
+  },
+  "brand": {
+    "name": "Tal Hub",
+    "tagline": "Legal Case Management Platform"
+  },
+  "pages": {
+    "home": {
+      "title": "Welcome to Tal Hub",
+      "subtitle": "Streamline your legal case management",
+      "description": "A comprehensive platform for managing legal cases, documents, and deadlines.",
+      "hero": {
+        "headline": "Manage your TAL case with confidence.",
+        "subheadline": "TALHub helps tenants, landlords, and lawyers in Quebec organize their housing cases, deadlines, and documents — all in one place.",
+        "ctaPrimary": "Get Started Free",
+        "ctaSecondary": "Watch a 1-minute demo",
+        "trustBadges": ["Data stored in Canada", "RLS secure by design", "Not affiliated with the TAL — built for clarity."]
+      },
+      "problem": {
+        "headline": "Housing disputes shouldn't feel impossible to manage.",
+        "subcopy": "The TAL process can be stressful, disorganized, and confusing. We make it easier for everyone involved.",
+        "cards": [
+          {
+            "title": "Tenants",
+            "description": "Track your case, upload evidence, and get guidance every step of the way."
+          },
+          {
+            "title": "Landlords", 
+            "description": "Stay compliant, manage communications, and reach fair settlements faster."
+          },
+          {
+            "title": "Lawyers",
+            "description": "Centralize client cases, automate documents, and get paid on time."
+          }
+        ]
+      },
+      "features": {
+        "headline": "Built for the TAL process — from start to finish",
+        "subheadline": "TALHub keeps every document, message, and deadline organized automatically, so you can focus on resolving your case — not managing paperwork.",
+        "cards": [
+          {
+            "title": "Case Management",
+            "description": "See your hearings, deadlines, and case status in one clear dashboard — updated in real time."
+          },
+          {
+            "title": "Secure Messaging",
+            "description": "Communicate safely with tenants, landlords, or representatives through encrypted, traceable chat threads."
+          },
+          {
+            "title": "Deadline Tracking",
+            "description": "Get automatic reminders for hearing dates, filings, and follow-ups — never miss an important step again."
+          },
+          {
+            "title": "Multi-Party Collaboration",
+            "description": "Easily invite all participants — tenants, landlords, lawyers, or witnesses — to share and review information securely."
+          },
+          {
+            "title": "Document Protection",
+            "description": "Store and share sensitive files with enterprise-grade encryption and clear access controls."
+          },
+          {
+            "title": "Compliance Ready",
+            "description": "Generate reports and keep accurate records that align with TAL filing and evidence requirements."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Ready to manage your TAL case?",
+        "subheadline": "Join Quebec's most trusted housing dispute management platform.",
+        "ctaPrimary": "Start Free Trial",
+        "ctaSecondary": "Schedule Demo",
+        "trustNote": "No credit card required • Free for first case • Cancel anytime"
+      }
+    },
+    "about": {
+      "title": "About Tal Hub",
+      "description": "Learn more about our platform and mission."
+    },
+    "help": {
+      "title": "Help & Support",
+      "description": "Get help and support for using Tal Hub."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "description": "Our privacy policy and data protection practices."
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "description": "Terms and conditions for using Tal Hub."
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Overview of your cases and activities"
+    },
+    "cases": {
+      "title": "My Cases",
+      "subtitle": "Manage your legal cases",
+      "newCase": "New Case",
+      "noCases": "No cases found",
+      "createFirst": "Create your first case to get started"
+    }
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "unauthorized": "You are not authorized to perform this action.",
+    "notFound": "The requested resource was not found.",
+    "validation": "Please check your input and try again."
+  }
+}

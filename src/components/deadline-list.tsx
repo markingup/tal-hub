@@ -18,6 +18,7 @@
 
 import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useAutoAnimate } from '@/lib/hooks/useAutoAnimate'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -47,6 +48,7 @@ interface DeadlineListProps {
 export function DeadlineList({ caseId }: DeadlineListProps) {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
   const [editingDeadline, setEditingDeadline] = useState<string | null>(null)
+  const [parent] = useAutoAnimate()
 
   const { data: deadlines = [], isLoading, error } = useDeadlines(caseId)
   const updateDeadline = useUpdateDeadline()
@@ -98,13 +100,13 @@ export function DeadlineList({ caseId }: DeadlineListProps) {
   const getStatusIcon = (status: 'overdue' | 'due-soon' | 'completed' | 'upcoming') => {
     switch (status) {
       case 'overdue':
-        return <AlertCircle className="h-4 w-4 text-red-600" />
+        return <AlertCircle className="h-4 w-4 text-error" />
       case 'due-soon':
-        return <AlertTriangle className="h-4 w-4 text-yellow-600" />
+        return <AlertTriangle className="h-4 w-4 text-warning" />
       case 'completed':
-        return <CheckCircle2 className="h-4 w-4 text-gray-600" />
+        return <CheckCircle2 className="h-4 w-4 text-text-secondary" />
       case 'upcoming':
-        return <Clock className="h-4 w-4 text-blue-600" />
+        return <Clock className="h-4 w-4 text-accent" />
     }
   }
 
@@ -145,7 +147,7 @@ export function DeadlineList({ caseId }: DeadlineListProps) {
               <AlertCircle className="h-6 w-6 text-destructive" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Failed to Load Deadlines</h3>
-            <p className="text-muted-foreground text-center mb-4">
+            <p className="text-text-secondary text-center mb-4">
               {error instanceof Error ? error.message : 'Failed to load deadlines'}
             </p>
             <Button variant="outline" onClick={() => window.location.reload()}>
@@ -180,7 +182,7 @@ export function DeadlineList({ caseId }: DeadlineListProps) {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
+          <div ref={parent} className="space-y-3">
             {deadlines.map((deadline) => {
               const status = getDeadlineStatus(deadline.due_date, deadline.is_done)
               const statusColor = getDeadlineStatusColor(status)
@@ -199,18 +201,18 @@ export function DeadlineList({ caseId }: DeadlineListProps) {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       {getStatusIcon(status)}
-                      <h4 className={`font-medium ${deadline.is_done ? 'line-through text-gray-500' : ''}`}>
+                      <h4 className={`font-medium ${deadline.is_done ? 'line-through text-text-secondary' : ''}`}>
                         {deadline.title}
                       </h4>
                       <Badge variant="outline" className="text-xs">
                         {status}
                       </Badge>
                     </div>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-text-secondary">
                       Due: {formatDate(deadline.due_date)}
                     </p>
                     {deadline.profile && (
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-text-secondary">
                         Created by: {deadline.profile.full_name || deadline.profile.email}
                       </p>
                     )}

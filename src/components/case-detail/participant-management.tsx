@@ -201,7 +201,7 @@ export function ParticipantManagement({
                 <p className="font-medium">
                   {participant.profile.full_name || participant.profile.email}
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-text-secondary">
                   {participant.profile.email}
                 </p>
                 <Badge variant="outline" className="text-xs">

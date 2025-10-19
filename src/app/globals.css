@@ -1,53 +1,90 @@
 @import "tailwindcss";
 
+/* TAL-Inspired Design Tokens */
+:root {
+  /* Typography Tokens */
+  --font-family-base: var(--font-public-sans), 'Inter', system-ui, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.125rem;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* TAL Color Palette */
+  --color-primary: #1E4D8C;
+  --color-primary-hover: #2563EB;
+  --color-accent: #0284C7;
+  --color-neutral-bg: #F5F6FA;
+  --color-surface: #FFFFFF;
+  --color-border: #E2E8F0;
+  --color-text-primary: #1E293B;
+  --color-text-secondary: #475569;
+  --color-success: #059669;
+  --color-warning: #F59E0B;
+  --color-error: #DC2626;
+
+  /* Animation tokens */
+  --ease-standard: cubic-bezier(.2,.8,.2,1);
+  --ease-emph: cubic-bezier(.2,.7,0,1);
+  --dur-fast: 120ms;    /* hover/focus */
+  --dur-normal: 200ms;  /* enter/exit */
+  --dur-slow: 320ms;    /* larger moves */
+}
+
 @theme {
-  --color-background: #ffffff;
-  --color-foreground: #0f0f0f;
-  --color-card: #ffffff;
-  --color-card-foreground: #0f0f0f;
-  --color-popover: #ffffff;
-  --color-popover-foreground: #0f0f0f;
-  --color-primary: #0f0f0f;
-  --color-primary-foreground: #fafafa;
+  --color-background: var(--color-neutral-bg);
+  --color-foreground: var(--color-text-primary);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-text-primary);
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-text-primary);
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-surface);
   --color-secondary: #f4f4f5;
-  --color-secondary-foreground: #0f0f0f;
+  --color-secondary-foreground: var(--color-text-primary);
   --color-muted: #f4f4f5;
-  --color-muted-foreground: #737373;
-  --color-accent: #f4f4f5;
-  --color-accent-foreground: #0f0f0f;
-  --color-destructive: #ef4444;
-  --color-destructive-foreground: #fafafa;
-  --color-border: #e4e4e7;
-  --color-input: #e4e4e7;
-  --color-ring: #0f0f0f;
+  --color-muted-foreground: var(--color-text-secondary);
+  --color-accent: var(--color-accent);
+  --color-accent-foreground: var(--color-surface);
+  --color-destructive: var(--color-error);
+  --color-destructive-foreground: var(--color-surface);
+  --color-border: var(--color-border);
+  --color-input: var(--color-border);
+  --color-ring: var(--color-primary);
   --radius: 0.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  @theme {
-    --color-background: #0f0f0f;
-    --color-foreground: #fafafa;
-    --color-card: #0f0f0f;
-    --color-card-foreground: #fafafa;
-    --color-popover: #0f0f0f;
-    --color-popover-foreground: #fafafa;
-    --color-primary: #fafafa;
-    --color-primary-foreground: #0f0f0f;
-    --color-secondary: #262626;
-    --color-secondary-foreground: #fafafa;
-    --color-muted: #262626;
-    --color-muted-foreground: #a3a3a3;
-    --color-accent: #262626;
-    --color-accent-foreground: #fafafa;
-    --color-destructive: #7f1d1d;
-    --color-destructive-foreground: #fafafa;
-    --color-border: #262626;
-    --color-input: #262626;
-    --color-ring: #d4d4d8;
-  }
+.dark {
+  --color-background: #0f0f0f;
+  --color-foreground: #fafafa;
+  --color-card: #0f0f0f;
+  --color-card-foreground: #fafafa;
+  --color-popover: #0f0f0f;
+  --color-popover-foreground: #fafafa;
+  --color-primary: #fafafa;
+  --color-primary-foreground: #0f0f0f;
+  --color-secondary: #262626;
+  --color-secondary-foreground: #fafafa;
+  --color-muted: #262626;
+  --color-muted-foreground: #a3a3a3;
+  --color-accent: #262626;
+  --color-accent-foreground: #fafafa;
+  --color-destructive: #7f1d1d;
+  --color-destructive-foreground: #fafafa;
+  --color-border: #262626;
+  --color-input: #262626;
+  --color-ring: #d4d4d8;
 }
 
 body {
+  font-family: var(--font-family-base);
   background-color: var(--color-background);
   color: var(--color-foreground);
+}
+
+/* Reduced motion support */
+.reduced-motion * {
+  animation: none !important;
+  transition: none !important;
 }

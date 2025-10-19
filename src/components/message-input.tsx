@@ -92,7 +92,7 @@ export function MessageInput({ caseId, onFileUpload }: MessageInputProps) {
         {/* Selected file preview */}
         {selectedFile && (
           <div className="flex items-center gap-2 p-2 bg-muted rounded-lg">
-            <Paperclip className="h-4 w-4 text-muted-foreground" />
+            <Paperclip className="h-4 w-4 text-text-secondary" />
             <span className="text-sm flex-1 truncate">{selectedFile.name}</span>
             <Button
               variant="ghost"
@@ -156,7 +156,7 @@ export function MessageInput({ caseId, onFileUpload }: MessageInputProps) {
         </div>
 
         {/* Help text */}
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-text-secondary">
           Press Enter to send • Attach files using the paperclip icon
         </p>
       </CardContent>

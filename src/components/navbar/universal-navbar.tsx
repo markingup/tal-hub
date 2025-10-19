@@ -2,6 +2,7 @@
 
 import { useAuth } from '@/components/auth-provider'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { LanguageToggle } from '@/components/language-toggle'
 import { NavbarBrand } from './navbar-brand'
 import { NavbarNavigation } from './navbar-navigation'
 import { NavbarUserMenu } from './navbar-user-menu'
@@ -50,6 +51,9 @@ export function UniversalNavbar({ className = '' }: UniversalNavbarProps) {
           <div className="flex items-center space-x-4">
             {/* Mobile Menu */}
             <NavbarMobileMenu isAuthenticated={isAuthenticated} />
+            
+            {/* Language Toggle */}
+            <LanguageToggle />
             
             {/* Theme Toggle */}
             <ThemeToggle />

@@ -61,11 +61,11 @@ export function DeadlineReminderBanner() {
     const status = getDeadlineStatus(deadline.due_date, deadline.is_done)
     switch (status) {
       case 'overdue':
-        return 'border-red-200 bg-red-50'
+        return 'border-error bg-red-50'
       case 'due-soon':
-        return 'border-yellow-200 bg-yellow-50'
+        return 'border-warning bg-yellow-50'
       default:
-        return 'border-blue-200 bg-blue-50'
+        return 'border-accent bg-blue-50'
     }
   }
 
@@ -73,28 +73,28 @@ export function DeadlineReminderBanner() {
     const status = getDeadlineStatus(deadline.due_date, deadline.is_done)
     switch (status) {
       case 'overdue':
-        return <AlertTriangle className="h-4 w-4 text-red-600" />
+        return <AlertTriangle className="h-4 w-4 text-error" />
       case 'due-soon':
-        return <AlertTriangle className="h-4 w-4 text-yellow-600" />
+        return <AlertTriangle className="h-4 w-4 text-warning" />
       default:
-        return <Clock className="h-4 w-4 text-blue-600" />
+        return <Clock className="h-4 w-4 text-accent" />
     }
   }
 
   return (
-    <Card className="border-l-4 border-l-yellow-500 mb-6">
+    <Card className="border-l-4 border-l-warning mb-6">
       <CardContent className="p-4">
         <div className="flex items-start justify-between">
           <div className="flex items-start gap-3 flex-1">
-            <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
+            <AlertTriangle className="h-5 w-5 text-warning mt-0.5 flex-shrink-0" />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-2">
-                <h3 className="font-semibold text-yellow-800">Upcoming Deadlines</h3>
-                <Badge variant="outline" className="text-xs bg-yellow-100 text-yellow-800 border-yellow-300">
+                <h3 className="font-semibold text-warning">Upcoming Deadlines</h3>
+                <Badge variant="outline" className="text-xs bg-yellow-100 text-warning border-warning">
                   {upcomingDeadlines.length} due soon
                 </Badge>
               </div>
-              <p className="text-sm text-yellow-700 mb-3">
+              <p className="text-sm text-warning mb-3">
                 You have deadlines approaching within the next 48 hours.
               </p>
               
@@ -110,7 +110,7 @@ export function DeadlineReminderBanner() {
                         <p className="font-medium text-sm truncate">
                           {deadline.title}
                         </p>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-text-secondary">
                           {deadline.case?.title} • Due in {formatTimeRemaining(deadline.due_date)}
                         </p>
                       </div>
@@ -128,7 +128,7 @@ export function DeadlineReminderBanner() {
                 ))}
                 
                 {upcomingDeadlines.length > 3 && (
-                  <p className="text-xs text-muted-foreground text-center pt-1">
+                  <p className="text-xs text-text-secondary text-center pt-1">
                     +{upcomingDeadlines.length - 3} more deadlines
                   </p>
                 )}

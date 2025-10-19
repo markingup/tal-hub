@@ -1,12 +1,13 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 import { logger } from '@/lib/utils/logger'
+import { locales, defaultLocale, isValidLocale, getLocaleFromPathname, addLocaleToPathname } from '@/lib/i18n'
 
 /**
- * Middleware for Route Protection
+ * Middleware for Route Protection and Internationalization
  * 
  * Follows UNIX principles:
- * - Single responsibility: Protect authenticated routes
+ * - Single responsibility: Protect authenticated routes and handle i18n
  * - Simple over complex: Clear path-based protection logic
  * - Text as interface: URL paths as the interface
  * 
@@ -15,8 +16,35 @@ import { logger } from '@/lib/utils/logger'
  * - Allows public access to auth routes
  * - Refreshes auth session automatically
  * - Redirects unauthenticated users to sign-in
+ * - Handles locale routing (/en/*, /fr/*)
  */
 export async function middleware(request: NextRequest) {
+  // Handle locale routing first
+  const pathname = request.nextUrl.pathname
+  const pathnameIsMissingLocale = locales.every(
+    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  )
+
+  // Redirect if there is no locale
+  if (pathnameIsMissingLocale) {
+    // Get locale from Accept-Language header or default to defaultLocale
+    const acceptLanguage = request.headers.get('accept-language')
+    let locale = defaultLocale
+    
+    if (acceptLanguage) {
+      const preferredLocale = acceptLanguage.split(',')[0].split('-')[0]
+      if (isValidLocale(preferredLocale)) {
+        locale = preferredLocale
+      }
+    }
+
+    const newUrl = new URL(addLocaleToPathname(pathname, locale), request.url)
+    return NextResponse.redirect(newUrl)
+  }
+
+  // Extract locale from pathname for route protection
+  const locale = getLocaleFromPathname(pathname)
+  const pathnameWithoutLocale = pathname.replace(`/${locale}`, '') || '/'
   let response = NextResponse.next({
     request: {
       headers: request.headers,

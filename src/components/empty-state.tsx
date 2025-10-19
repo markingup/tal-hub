@@ -39,9 +39,9 @@ export function EmptyState({
   return (
     <Card className={className}>
       <CardContent className="flex flex-col items-center justify-center py-12">
-        <Icon className="h-12 w-12 text-muted-foreground mb-4" />
+        <Icon className="h-12 w-12 text-text-secondary mb-4" />
         <h3 className="text-lg font-semibold mb-2">{title}</h3>
-        <p className="text-muted-foreground text-center mb-4 max-w-sm">
+        <p className="text-text-secondary text-center mb-4 max-w-sm">
           {description}
         </p>
         {actionLabel && onAction && (

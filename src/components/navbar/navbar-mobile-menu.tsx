@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 import { getMobileNavigationItems } from '@/lib/config/navigation'
+import { useI18n } from '@/components/i18n-provider'
 import { Menu } from 'lucide-react'
 
 /**
@@ -27,6 +28,7 @@ export function NavbarMobileMenu({ isAuthenticated, className = '' }: NavbarMobi
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
   const items = getMobileNavigationItems(isAuthenticated)
+  const { t } = useI18n()
 
   return (
     <div className={cn('md:hidden', className)}>
@@ -41,7 +43,7 @@ export function NavbarMobileMenu({ isAuthenticated, className = '' }: NavbarMobi
           <div className="flex h-full flex-col">
             {/* Header */}
             <div className="flex h-16 items-center px-6 border-b">
-              <h1 className="text-xl font-semibold">Tal Hub</h1>
+              <h1 className="text-xl font-semibold">{t('brand.name')}</h1>
             </div>
             
             {/* Navigation */}
@@ -49,6 +51,7 @@ export function NavbarMobileMenu({ isAuthenticated, className = '' }: NavbarMobi
               {items.map((item) => {
                 const isActive = pathname === item.href
                 const Icon = item.icon
+                const displayName = item.nameKey ? t(item.nameKey) : item.name
                 
                 return (
                   <Link
@@ -58,12 +61,12 @@ export function NavbarMobileMenu({ isAuthenticated, className = '' }: NavbarMobi
                       'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                       isActive
                         ? 'bg-primary text-primary-foreground'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                        : 'text-text-secondary hover:text-foreground hover:bg-muted'
                     )}
                     onClick={() => setOpen(false)}
                   >
                     {Icon && <Icon className="h-4 w-4" />}
-                    {item.name}
+                    {displayName}
                   </Link>
                 )
               })}

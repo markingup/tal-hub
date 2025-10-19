@@ -5,10 +5,10 @@ import { FileText } from 'lucide-react'
 import type { Case } from '@/lib/supabase/types'
 
 const statusConfig = {
-  draft: { label: 'Draft', color: 'bg-gray-500', textColor: 'text-gray-600' },
-  active: { label: 'Active', color: 'bg-blue-500', textColor: 'text-blue-600' },
-  closed: { label: 'Closed', color: 'bg-green-500', textColor: 'text-green-600' },
-  archived: { label: 'Archived', color: 'bg-gray-400', textColor: 'text-gray-500' },
+  draft: { label: 'Draft', color: 'bg-gray-100', textColor: 'text-text-secondary' },
+  active: { label: 'Active', color: 'bg-primary/10', textColor: 'text-primary' },
+  closed: { label: 'Closed', color: 'bg-green-100', textColor: 'text-success' },
+  archived: { label: 'Archived', color: 'bg-gray-50', textColor: 'text-text-secondary' },
 }
 
 const typeConfig = {
@@ -43,12 +43,12 @@ export function CaseOverview({ caseData }: { caseData: Case }) {
       <CardContent className="space-y-4">
         <div className="space-y-2">
           <Label className="text-sm font-medium">Title</Label>
-          <p className="text-sm text-muted-foreground">{caseData.title}</p>
+          <p className="text-sm text-text-secondary">{caseData.title}</p>
         </div>
         
         <div className="space-y-2">
           <Label className="text-sm font-medium">Type</Label>
-          <p className="text-sm text-muted-foreground">{typeConfig[caseData.type]}</p>
+          <p className="text-sm text-text-secondary">{typeConfig[caseData.type]}</p>
         </div>
         
         <div className="space-y-2">
@@ -61,21 +61,21 @@ export function CaseOverview({ caseData }: { caseData: Case }) {
         {caseData.opposing_party_name && (
           <div className="space-y-2">
             <Label className="text-sm font-medium">Opposing Party</Label>
-            <p className="text-sm text-muted-foreground">{caseData.opposing_party_name}</p>
+            <p className="text-sm text-text-secondary">{caseData.opposing_party_name}</p>
           </div>
         )}
         
         {caseData.tal_dossier_number && (
           <div className="space-y-2">
             <Label className="text-sm font-medium">TAL Dossier Number</Label>
-            <p className="text-sm text-muted-foreground">{caseData.tal_dossier_number}</p>
+            <p className="text-sm text-text-secondary">{caseData.tal_dossier_number}</p>
           </div>
         )}
         
         {caseData.next_hearing_date && (
           <div className="space-y-2">
             <Label className="text-sm font-medium">Next Hearing</Label>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-text-secondary">
               {new Date(caseData.next_hearing_date).toLocaleDateString('en-US', {
                 weekday: 'long',
                 year: 'numeric',
@@ -89,7 +89,7 @@ export function CaseOverview({ caseData }: { caseData: Case }) {
         {caseData.notes && (
           <div className="space-y-2">
             <Label className="text-sm font-medium">Notes</Label>
-            <p className="text-sm text-muted-foreground whitespace-pre-wrap">{caseData.notes}</p>
+            <p className="text-sm text-text-secondary whitespace-pre-wrap">{caseData.notes}</p>
           </div>
         )}
       </CardContent>

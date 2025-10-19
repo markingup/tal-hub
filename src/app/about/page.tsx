@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Shield, Users, MessageCircle, FileText, Calendar, Zap, Heart, Mail, Phone } from 'lucide-react'
+import { Shield, Users, MessageCircle, FileText, Calendar, Zap, Heart, CheckCircle, Bolt, Lock, Database, UserCheck, FileCheck, Scale, FolderOpen, Clock } from 'lucide-react'
+import { Layout } from '@/components/layout'
 
 export const metadata: Metadata = {
   title: 'About TALHub - Tenant-Landlord Dispute Management',
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="container mx-auto py-8 px-4 max-w-6xl">
+    <Layout>
+      <div className="container mx-auto py-8 px-4 max-w-6xl">
       {/* Hero Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">About TALHub</h1>
@@ -24,41 +26,48 @@ export default function AboutPage() {
         <CardHeader className="text-center">
           <CardTitle className="text-2xl mb-4">Our Mission</CardTitle>
           <CardDescription className="text-lg">
-            TALHub was created to address the complexity and inefficiency that often characterizes tenant-landlord disputes. 
-            We believe that transparency, clear communication, and organized documentation can resolve conflicts more 
-            effectively than traditional adversarial approaches.
+            TALHub exists to make housing disputes simpler, fairer, and less stressful for everyone.
+            We believe that clear information, open communication, and organized documentation lead to faster, more balanced outcomes — without unnecessary conflict.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-6 mt-6">
             <div className="text-center p-6 border rounded-lg">
-              <Heart className="h-8 w-8 text-primary mx-auto mb-3" />
+              <Scale className="h-8 w-8 text-primary mx-auto mb-3" />
               <h3 className="text-lg font-semibold mb-2">Fair Resolution</h3>
               <p className="text-muted-foreground">
-                We promote fair and transparent dispute resolution processes that benefit all parties involved.
+                We help tenants and landlords reach solutions through transparency and collaboration, not confusion or confrontation.
               </p>
             </div>
             <div className="text-center p-6 border rounded-lg">
               <Shield className="h-8 w-8 text-primary mx-auto mb-3" />
-              <h3 className="text-lg font-semibold mb-2">Secure Platform</h3>
+              <h3 className="text-lg font-semibold mb-2">Trust & Security</h3>
               <p className="text-muted-foreground">
-                Your data and communications are protected with enterprise-grade security and privacy controls.
+                Your case data and communications are protected with the same standards trusted by legal and housing institutions across Canada.
               </p>
             </div>
+          </div>
+          <div className="text-center mt-6">
+            <p className="text-lg font-medium">
+              Built to empower both sides — with clarity, fairness, and respect.
+            </p>
           </div>
         </CardContent>
       </Card>
 
       {/* Features Overview */}
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-center mb-8">Platform Features</h2>
+        <h2 className="text-3xl font-bold text-center mb-4">Platform Features</h2>
+        <p className="text-center text-lg text-muted-foreground mb-8 max-w-3xl mx-auto">
+          Everything you need to manage your housing case — organized, transparent, and secure.
+        </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card>
             <CardHeader>
-              <Users className="h-8 w-8 text-primary mb-2" />
+              <FolderOpen className="h-8 w-8 text-primary mb-2" />
               <CardTitle>Case Management</CardTitle>
               <CardDescription>
-                Organize disputes with structured case files, participant management, and role-based access control.
+                Keep every detail in one place — from participant info to communication history — with role-based permissions for secure collaboration.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -68,7 +77,7 @@ export default function AboutPage() {
               <FileText className="h-8 w-8 text-primary mb-2" />
               <CardTitle>Document Sharing</CardTitle>
               <CardDescription>
-                Securely upload, organize, and share lease agreements, notices, photos, and legal documents.
+                Upload and organize leases, notices, photos, and legal files safely. Share them only with those who need access.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -76,19 +85,19 @@ export default function AboutPage() {
           <Card>
             <CardHeader>
               <MessageCircle className="h-8 w-8 text-primary mb-2" />
-              <CardTitle>Real-time Messaging</CardTitle>
+              <CardTitle>Real-Time Messaging</CardTitle>
               <CardDescription>
-                Communicate with all case participants through secure, real-time messaging channels.
+                Communicate directly with participants through secure, time-stamped chat threads — no lost emails or confusion.
               </CardDescription>
             </CardHeader>
           </Card>
 
           <Card>
             <CardHeader>
-              <Calendar className="h-8 w-8 text-primary mb-2" />
+              <Clock className="h-8 w-8 text-primary mb-2" />
               <CardTitle>Deadline Tracking</CardTitle>
               <CardDescription>
-                Stay on top of important dates, hearings, and deadlines with automated reminders and notifications.
+                Never miss a key date again. Get reminders for hearings, filings, and important case milestones.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -96,9 +105,9 @@ export default function AboutPage() {
           <Card>
             <CardHeader>
               <Shield className="h-8 w-8 text-primary mb-2" />
-              <CardTitle>Role-based Access</CardTitle>
+              <CardTitle>Security & Privacy</CardTitle>
               <CardDescription>
-                Secure access controls ensure only authorized participants can view case information and documents.
+                Your data stays encrypted and protected by strict access controls and Canadian-hosted servers.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -106,9 +115,9 @@ export default function AboutPage() {
           <Card>
             <CardHeader>
               <Zap className="h-8 w-8 text-primary mb-2" />
-              <CardTitle>Modern Technology</CardTitle>
+              <CardTitle>Modern, Secure, and Effortless</CardTitle>
               <CardDescription>
-                Built with modern web technologies for fast, reliable, and mobile-friendly user experience.
+                Built to make managing your housing case simple, fast, and worry-free — so you can focus on resolution, not red tape.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -120,61 +129,78 @@ export default function AboutPage() {
         <CardHeader>
           <CardTitle className="text-2xl">Security & Privacy</CardTitle>
           <CardDescription>
-            Your trust is our priority. We implement industry-leading security measures to protect your data.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Data Protection</h3>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>• End-to-end encryption for all communications</li>
-                <li>• Secure file storage with access controls</li>
-                <li>• Regular security audits and updates</li>
-                <li>• Compliance with privacy regulations</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Access Control</h3>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>• Role-based permissions for all users</li>
-                <li>• Secure authentication with magic links</li>
-                <li>• Audit trails for all platform activities</li>
-                <li>• Data retention and deletion policies</li>
-              </ul>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Technology Stack */}
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle className="text-2xl">Built with Modern Technology</CardTitle>
-          <CardDescription>
-            TALHub leverages cutting-edge web technologies to deliver a fast, secure, and reliable experience.
+            Your trust matters. TALHub protects your information with the same level of care used by professional legal and housing systems — keeping your documents and communications safe at every step.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="text-center p-4 border rounded-lg">
-              <h3 className="font-semibold mb-2">Frontend</h3>
+              <Database className="h-8 w-8 text-primary mx-auto mb-2" />
+              <h3 className="text-lg font-semibold mb-3">Your Data, Protected</h3>
               <p className="text-sm text-muted-foreground">
-                Next.js 15, TypeScript, Tailwind CSS, React Query
+                All files and messages are encrypted end-to-end and stored securely on Canadian servers. Only you and authorized parties can access them.
               </p>
             </div>
             <div className="text-center p-4 border rounded-lg">
-              <h3 className="font-semibold mb-2">Backend</h3>
+              <UserCheck className="h-8 w-8 text-primary mx-auto mb-2" />
+              <h3 className="text-lg font-semibold mb-3">Controlled Access</h3>
               <p className="text-sm text-muted-foreground">
-                Supabase, PostgreSQL, Row Level Security
+                Each user has clear, role-based permissions — ensuring only the right people see the right information.
               </p>
             </div>
             <div className="text-center p-4 border rounded-lg">
-              <h3 className="font-semibold mb-2">Security</h3>
+              <FileCheck className="h-8 w-8 text-primary mx-auto mb-2" />
+              <h3 className="text-lg font-semibold mb-3">Transparency & Accountability</h3>
               <p className="text-sm text-muted-foreground">
-                Magic Link Auth, RLS Policies, Encrypted Storage
+                Every action is logged for traceability, and you can request deletion of your data anytime under our privacy policy.
               </p>
             </div>
+          </div>
+          <div className="text-center mt-6">
+            <p className="text-lg font-medium">
+              Secure by design. Private by default.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Modern, Secure, and Effortless */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle className="text-2xl">Modern, Secure, and Effortless</CardTitle>
+          <CardDescription>
+            TALHub is built to make managing your housing case simple, fast, and worry-free.
+            Behind the scenes, we use trusted, modern tools so you can focus on what matters — your case.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="text-center p-4 border rounded-lg">
+              <CheckCircle className="h-8 w-8 text-primary mx-auto mb-2" />
+              <h3 className="font-semibold mb-2">Private and Encrypted</h3>
+              <p className="text-sm text-muted-foreground">
+                Your documents and data stay fully protected
+              </p>
+            </div>
+            <div className="text-center p-4 border rounded-lg">
+              <Bolt className="h-8 w-8 text-primary mx-auto mb-2" />
+              <h3 className="font-semibold mb-2">Fast and Reliable</h3>
+              <p className="text-sm text-muted-foreground">
+                Instant updates and smooth performance across devices
+              </p>
+            </div>
+            <div className="text-center p-4 border rounded-lg">
+              <Lock className="h-8 w-8 text-primary mx-auto mb-2" />
+              <h3 className="font-semibold mb-2">Secure Access</h3>
+              <p className="text-sm text-muted-foreground">
+                Password-free login and verified user authentication
+              </p>
+            </div>
+          </div>
+          <div className="text-center mt-6">
+            <p className="text-lg font-medium">
+              Safe. Efficient. Built for real tenants and landlords.
+            </p>
           </div>
         </CardContent>
       </Card>
@@ -184,38 +210,21 @@ export default function AboutPage() {
         <CardHeader>
           <CardTitle className="text-2xl">Get in Touch</CardTitle>
           <CardDescription>
-            Have questions about TALHub? We're here to help.
+            Have questions about TALHub? We&apos;re here to help.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-muted-foreground" />
-                <div>
-                  <p className="font-medium">Email Support</p>
-                  <p className="text-sm text-muted-foreground">support@talhub.com</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-muted-foreground" />
-                <div>
-                  <p className="font-medium">Phone Support</p>
-                  <p className="text-sm text-muted-foreground">1-800-TAL-HUB (1-800-825-482)</p>
-                </div>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <Button className="w-full" asChild>
-                <a href="/help">Visit Help Center</a>
-              </Button>
-              <Button variant="outline" className="w-full" asChild>
-                <a href="/auth/sign-in">Get Started</a>
-              </Button>
-            </div>
+          <div className="space-y-4">
+            <Button className="w-full" asChild>
+              <a href="/help">Visit Help Center</a>
+            </Button>
+            <Button variant="outline" className="w-full" asChild>
+              <a href="/auth/sign-in">Get Started</a>
+            </Button>
           </div>
         </CardContent>
       </Card>
-    </div>
+      </div>
+    </Layout>
   )
 }

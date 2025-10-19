@@ -17,6 +17,7 @@
 
 import { useEffect, useRef } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
+import { useAutoAnimate } from '@/lib/hooks/useAutoAnimate'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Loader2, MessageSquare, RefreshCw } from 'lucide-react'
@@ -32,6 +33,7 @@ interface MessageListProps {
 export function MessageList({ caseId, currentUserId }: MessageListProps) {
   const { data: messages = [], isLoading, error } = useMessages(caseId)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [parent] = useAutoAnimate()
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -58,7 +60,7 @@ export function MessageList({ caseId, currentUserId }: MessageListProps) {
             <MessageSquare className="h-6 w-6 text-destructive" />
           </div>
           <h3 className="text-lg font-semibold mb-2">Failed to Load Messages</h3>
-          <p className="text-muted-foreground text-center mb-4">
+          <p className="text-text-secondary text-center mb-4">
             {error instanceof Error ? error.message : 'Unknown error occurred'}
           </p>
           <Button variant="outline" onClick={() => window.location.reload()}>
@@ -85,13 +87,15 @@ export function MessageList({ caseId, currentUserId }: MessageListProps) {
   return (
     <Card className="flex-1 flex flex-col">
       <CardContent className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((message) => (
-          <MessageItem 
-            key={message.id} 
-            message={message} 
-            isOwn={message.sender_id === currentUserId}
-          />
-        ))}
+        <div ref={parent} className="space-y-4">
+          {messages.map((message) => (
+            <MessageItem 
+              key={message.id} 
+              message={message} 
+              isOwn={message.sender_id === currentUserId}
+            />
+          ))}
+        </div>
         <div ref={messagesEndRef} />
       </CardContent>
     </Card>
@@ -134,7 +138,7 @@ function MessageItem({ message, isOwn }: MessageItemProps) {
       <div className={`max-w-[80%] space-y-1`}>
         {/* Sender name and timestamp */}
         {!isOwn && !isSystemMessage && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-sm text-text-secondary">
             <span className="font-medium">{senderName}</span>
             <span>•</span>
             <span>{formatTime(message.created_at)}</span>
@@ -167,7 +171,7 @@ function MessageItem({ message, isOwn }: MessageItemProps) {
         
         {/* Timestamp for own messages */}
         {isOwn && !isSystemMessage && (
-          <div className="text-right text-xs text-muted-foreground">
+          <div className="text-right text-xs text-text-secondary">
             {formatTime(message.created_at)}
           </div>
         )}

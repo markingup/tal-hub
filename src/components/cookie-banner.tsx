@@ -38,10 +38,10 @@ export function CookieBanner() {
       <Card className="shadow-lg">
         <CardContent className="p-4">
           <div className="flex items-start gap-3">
-            <Cookie className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+            <Cookie className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
             <div className="flex-1">
               <h3 className="font-medium text-sm mb-2">Cookie Consent</h3>
-              <p className="text-sm text-muted-foreground mb-3">
+              <p className="text-sm text-text-secondary mb-3">
                 We use cookies to improve your experience, analyze site usage, and assist in our marketing efforts. 
                 By continuing to use our site, you consent to our use of cookies.
               </p>

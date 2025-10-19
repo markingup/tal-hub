@@ -116,17 +116,17 @@ export function DocumentList({ caseId }: DocumentListProps) {
   const getFileIcon = (type: string) => {
     switch (type) {
       case 'document':
-        return <FileText className="h-4 w-4 text-blue-500" />
+        return <FileText className="h-4 w-4 text-accent" />
       case 'image':
-        return <FileText className="h-4 w-4 text-green-500" />
+        return <FileText className="h-4 w-4 text-success" />
       case 'audio':
         return <FileText className="h-4 w-4 text-purple-500" />
       case 'video':
-        return <FileText className="h-4 w-4 text-red-500" />
+        return <FileText className="h-4 w-4 text-error" />
       case 'archive':
         return <FileText className="h-4 w-4 text-orange-500" />
       default:
-        return <FileText className="h-4 w-4 text-gray-500" />
+        return <FileText className="h-4 w-4 text-text-secondary" />
     }
   }
 
@@ -176,7 +176,7 @@ export function DocumentList({ caseId }: DocumentListProps) {
             <AlertCircle className="h-6 w-6 text-destructive" />
           </div>
           <h3 className="text-lg font-semibold mb-2">Error Loading Documents</h3>
-          <p className="text-muted-foreground text-center mb-4">
+          <p className="text-text-secondary text-center mb-4">
             {error instanceof Error ? error.message : 'Failed to load documents'}
           </p>
           <Button variant="outline" onClick={() => window.location.reload()}>
@@ -224,7 +224,7 @@ export function DocumentList({ caseId }: DocumentListProps) {
                   </Badge>
                 </div>
                 
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-4 text-sm text-text-secondary">
                   <div className="flex items-center gap-1">
                     <Calendar className="h-3 w-3" />
                     {formatDate(document.created_at)}

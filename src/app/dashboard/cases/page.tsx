@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useAutoAnimate } from '@/lib/hooks/useAutoAnimate'
 import { Card, CardContent } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
@@ -256,6 +257,7 @@ export default function CasesPage() {
   const router = useRouter()
   const { data: cases = [], isLoading, error } = useCases()
   const [showNewCaseDialog, setShowNewCaseDialog] = useState(false)
+  const [parent] = useAutoAnimate()
 
   // Filter cases by status
   const draftCases = cases.filter(c => c.status === 'draft')
@@ -347,7 +349,7 @@ export default function CasesPage() {
         </TabsList>
 
         <TabsContent value="all" className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div ref={parent} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {cases.map((caseItem) => (
               <CaseCard 
                 key={caseItem.id} 
@@ -369,7 +371,7 @@ export default function CasesPage() {
         </TabsContent>
 
         <TabsContent value="draft" className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div ref={parent} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {draftCases.map((caseItem) => (
               <CaseCard 
                 key={caseItem.id} 
@@ -391,7 +393,7 @@ export default function CasesPage() {
         </TabsContent>
 
         <TabsContent value="active" className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div ref={parent} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {activeCases.map((caseItem) => (
               <CaseCard 
                 key={caseItem.id} 
@@ -413,7 +415,7 @@ export default function CasesPage() {
         </TabsContent>
 
         <TabsContent value="closed" className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div ref={parent} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {closedCases.map((caseItem) => (
               <CaseCard 
                 key={caseItem.id} 
@@ -433,7 +435,7 @@ export default function CasesPage() {
         </TabsContent>
 
         <TabsContent value="archived" className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div ref={parent} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {archivedCases.map((caseItem) => (
               <CaseCard 
                 key={caseItem.id} 

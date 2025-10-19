@@ -1,173 +1,168 @@
-# Universal Navbar Rebuild Plan
+# Animation Strategy Plan - TALHub
 
-## Overview
-Rebuild the header component to be a universal, centered navbar that follows Unix principles and works across the entire codebase.
+## Current State Analysis ✅
+- ✅ `tailwindcss-animate` already installed
+- ✅ Radix UI components present (dialogs, sheets, etc.)
+- ✅ Basic CSS animations exist (spinner, pulse)
+- ✅ Design tokens established
+- ❌ No animation duration/easing tokens
+- ❌ No reduced motion support
+- ❌ No clear animation strategy
 
-## Current State Analysis
-
-### Current Header Issues
-- **Not universal**: Different navigation patterns across pages (main header vs dashboard sidebar)
-- **Not centered**: Left-aligned layout with flex justify-end
-- **Violates Unix principles**: 
-  - Single responsibility: Mixed concerns (branding, navigation, theme toggle)
-  - Not composable: Hard-coded navigation items
-  - Not configurable: Navigation items embedded in component
-
-### Current Navigation Structure
-- **Public pages**: Home, About, Docs (in main header)
-- **Dashboard**: Overview, My Cases (in sidebar)
-- **Auth pages**: Sign-in, callback
-- **Legal pages**: Privacy, Terms, Help
-
-## Unix Principles Application
-
-### 1. Do One Thing Well
-- **Navbar**: Pure navigation component
-- **Brand**: Separate logo/brand component
-- **Auth**: Separate user menu component
-- **Theme**: Separate theme toggle component
-
-### 2. Work Together
-- **Config-driven**: Navigation items from config object
-- **Composable**: Combine components via props
-- **Interface-based**: Clear prop contracts
-
-### 3. Text as Interface
-- **Navigation config**: JSON structure for routes
-- **Props**: Simple, readable interfaces
-- **State**: Minimal, predictable state
-
-### 4. KISS
-- **Simple layout**: Centered, clean design
-- **Minimal state**: Only essential state
-- **Clear structure**: Logical component hierarchy
+## Optimized Recommendation (TL;DR)
+**Phase 1**: CSS transitions + existing Radix components (0 new deps)
+**Phase 2**: Add @formkit/auto-animate for layout animations (~2KB)
+**Phase 3**: Consider motion-one only for complex sequences (~6KB)
 
 ## Implementation Plan
 
-### Phase 1: Configuration & Structure
-- [ ] Create `lib/config/navigation.ts` with centralized navigation config
-- [ ] Define navigation item interface
-- [ ] Create auth-aware navigation logic
+### Phase 1: Foundation (30 mins)
+1. **Add animation tokens to globals.css**
+```css
+:root {
+  /* Animation tokens */
+  --ease-standard: cubic-bezier(.2,.8,.2,1);
+  --ease-emph: cubic-bezier(.2,.7,0,1);
+  --dur-fast: 120ms;    /* hover/focus */
+  --dur-normal: 200ms;  /* enter/exit */
+  --dur-slow: 320ms;    /* larger moves */
+}
+```
 
-### Phase 2: Component Decomposition
-- [ ] Extract `NavbarBrand` component
-- [ ] Extract `NavbarNavigation` component  
-- [ ] Extract `NavbarUserMenu` component
-- [ ] Extract `NavbarMobileMenu` component
-
-### Phase 3: Universal Navbar
-- [ ] Create main `UniversalNavbar` component
-- [ ] Implement centered layout
-- [ ] Add responsive mobile menu
-- [ ] Integrate auth-aware navigation
-
-### Phase 4: Integration
-- [ ] Update `Layout` component to use new navbar
-- [ ] Update dashboard layout to use universal navbar
-- [ ] Remove duplicate navigation code
-- [ ] Test across all pages
-
-### Phase 5: Polish & Testing
-- [ ] Add active route highlighting
-- [ ] Implement smooth transitions
-- [ ] Test responsive breakpoints
-- [ ] Verify accessibility
-
-## Navigation Configuration Structure
-
+2. **Create useReducedMotion hook**
 ```typescript
-interface NavigationItem {
-  name: string;
-  href: string;
-  icon?: React.ComponentType;
-  requiresAuth?: boolean;
-  public?: boolean;
-  mobile?: boolean;
+// src/lib/hooks/useReducedMotion.ts
+import { useEffect, useState } from "react";
+
+export function useReducedMotion() {
+  const [reduced, set] = useState(false);
+  
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handler = () => set(mediaQuery.matches);
+    
+    handler(); // Check initial state
+    mediaQuery.addEventListener("change", handler);
+    
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
+  
+  return reduced;
 }
+```
 
-interface NavigationConfig {
-  brand: {
-    name: string;
-    href: string;
-    logo?: React.ComponentType;
-  };
-  public: NavigationItem[];
-  authenticated: NavigationItem[];
-  mobile: NavigationItem[];
+3. **Add reduced motion CSS**
+```css
+.reduced-motion * {
+  animation: none !important;
+  transition: none !important;
 }
 ```
 
-## Design Specifications
-
-### Layout
-- **Centered**: Navbar content centered with max-width container
-- **Responsive**: Collapsible mobile menu
-- **Sticky**: Fixed at top with backdrop blur
-- **Height**: Consistent 64px height
-
-### Visual Hierarchy
-- **Brand**: Left side, prominent
-- **Navigation**: Center, primary items
-- **Actions**: Right side, secondary items (theme, user menu)
-
-### Responsive Behavior
-- **Desktop**: Full navigation visible
-- **Tablet**: Condensed navigation
-- **Mobile**: Hamburger menu with slide-out navigation
-
-## Success Criteria
-
-### Functional
-- [ ] Works on all pages (public, dashboard, auth)
-- [ ] Responsive across all breakpoints
-- [ ] Auth-aware navigation items
-- [ ] Active route highlighting
-- [ ] Accessible keyboard navigation
-
-### Technical
-- [ ] Follows Unix principles
-- [ ] Configurable navigation
-- [ ] Composable components
-- [ ] Minimal re-renders
-- [ ] Type-safe interfaces
-
-### User Experience
-- [ ] Centered, balanced layout
-- [ ] Smooth transitions
-- [ ] Clear visual hierarchy
-- [ ] Intuitive mobile experience
-
-## Implementation Notes
-
-### Component Structure
-```
-UniversalNavbar
-├── NavbarBrand
-├── NavbarNavigation (desktop)
-├── NavbarMobileMenu (mobile)
-└── NavbarActions
-    ├── ThemeToggle
-    └── UserMenu (auth-aware)
+### Phase 2: Auto-Animate Integration (15 mins)
+1. **Install package**
+```bash
+npm install @formkit/auto-animate
 ```
 
-### State Management
-- Use `usePathname()` for active route detection
-- Use `useAuth()` for authentication state
-- Minimal local state for mobile menu toggle
+2. **Create useAutoAnimate hook**
+```typescript
+// src/lib/hooks/useAutoAnimate.ts
+import { useAutoAnimate as useAutoAnimateLib } from '@formkit/auto-animate/react';
+import { useReducedMotion } from './useReducedMotion';
 
-### Styling Approach
-- Tailwind utility classes
-- Consistent spacing and typography
-- Responsive design patterns
-- Dark/light theme support
+export function useAutoAnimate(options?: { duration?: number; easing?: string }) {
+  const reducedMotion = useReducedMotion();
+  const [parent] = useAutoAnimateLib({
+    duration: reducedMotion ? 0 : (options?.duration || 200),
+    easing: options?.easing || 'var(--ease-standard)',
+  });
+  
+  return [parent];
+}
+```
+
+### Phase 3: Component Updates (45 mins)
+1. **Update existing components with transitions**
+   - Case cards: hover scale + shadow
+   - Buttons: focus/hover states
+   - Dialogs: fade in/out
+   - Loading states: smooth transitions
+
+2. **Add auto-animate to lists**
+   - Case list reordering
+   - Document list updates
+   - Message list changes
+   - Deadline list modifications
+
+## Usage Guidelines
+
+### CSS Transitions (Default)
+```typescript
+// Hover effects
+className="transition-all duration-[var(--dur-fast)] hover:scale-105 hover:shadow-md"
+
+// Focus states
+className="transition-colors duration-[var(--dur-fast)] focus:ring-2 focus:ring-primary"
+
+// Enter/exit animations
+className="transition-opacity duration-[var(--dur-normal)] ease-[var(--ease-standard)]"
+```
+
+### Auto-Animate (Layout Changes)
+```typescript
+import { useAutoAnimate } from '@/lib/hooks/useAutoAnimate';
+
+function CaseList({ cases }) {
+  const [parent] = useAutoAnimate();
+  
+  return (
+    <div ref={parent}>
+      {cases.map(case => <CaseCard key={case.id} {...case} />)}
+    </div>
+  );
+}
+```
+
+### Radix Presence (Conditional UI)
+```typescript
+import { Presence } from '@radix-ui/react-presence';
+
+function ConditionalContent({ isOpen }) {
+  return (
+    <Presence present={isOpen}>
+      <div className="transition-opacity duration-[var(--dur-normal)] data-[state=open]:animate-in data-[state=closed]:animate-out">
+        Content here
+      </div>
+    </Presence>
+  );
+}
+```
+
+## Priority Implementation Order
+1. **High Impact, Low Effort**
+   - Add animation tokens to globals.css
+   - Update button hover states
+   - Add smooth transitions to case cards
+
+2. **Medium Impact, Medium Effort**
+   - Implement useReducedMotion hook
+   - Add auto-animate to case list
+   - Update dialog animations
+
+3. **Low Impact, High Effort**
+   - Complex sequence animations (if needed)
+   - Motion-one integration (only if required)
+
+## Success Metrics
+- ✅ Zero custom animation code maintenance
+- ✅ Consistent animation timing across app
+- ✅ Accessibility compliance (reduced motion)
+- ✅ Bundle size impact < 10KB total
+- ✅ Developer experience: drop-in hooks
 
 ## Next Steps
-1. Create navigation configuration
-2. Build component decomposition
-3. Implement universal navbar
-4. Update layouts
-5. Test and polish
-
----
-
-*This plan follows the Unix philosophy: simple, focused, composable components that work together to create a universal navigation experience.*
+1. Implement Phase 1 (foundation)
+2. Test with existing components
+3. Add Phase 2 (auto-animate) if needed
+4. Document usage patterns in CONTRIBUTING.md

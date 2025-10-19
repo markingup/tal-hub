@@ -4,7 +4,6 @@ import {
   FileText, 
   Home, 
   Info, 
-  BookOpen, 
   HelpCircle,
   Shield,
   FileText as TermsIcon
@@ -22,6 +21,7 @@ import {
 
 export interface NavigationItem {
   name: string
+  nameKey?: string // Translation key for name
   href: string
   icon?: LucideIcon
   requiresAuth?: boolean
@@ -49,6 +49,7 @@ export const navigationConfig: NavigationConfig = {
   public: [
     {
       name: 'Home',
+      nameKey: 'navigation.home',
       href: '/',
       icon: Home,
       public: true,
@@ -57,6 +58,7 @@ export const navigationConfig: NavigationConfig = {
     },
     {
       name: 'About',
+      nameKey: 'navigation.about',
       href: '/about',
       icon: Info,
       public: true,
@@ -64,15 +66,8 @@ export const navigationConfig: NavigationConfig = {
       description: 'Learn about Tal Hub'
     },
     {
-      name: 'Docs',
-      href: '/docs',
-      icon: BookOpen,
-      public: true,
-      mobile: true,
-      description: 'Documentation and guides'
-    },
-    {
       name: 'Help',
+      nameKey: 'navigation.help',
       href: '/help',
       icon: HelpCircle,
       public: true,
@@ -83,6 +78,7 @@ export const navigationConfig: NavigationConfig = {
   authenticated: [
     {
       name: 'Dashboard',
+      nameKey: 'navigation.dashboard',
       href: '/dashboard',
       icon: LayoutDashboard,
       requiresAuth: true,
@@ -91,6 +87,7 @@ export const navigationConfig: NavigationConfig = {
     },
     {
       name: 'My Cases',
+      nameKey: 'navigation.myCases',
       href: '/dashboard/cases',
       icon: FileText,
       requiresAuth: true,
@@ -101,6 +98,7 @@ export const navigationConfig: NavigationConfig = {
   mobile: [
     {
       name: 'Privacy',
+      nameKey: 'navigation.privacy',
       href: '/privacy',
       icon: Shield,
       public: true,
@@ -109,6 +107,7 @@ export const navigationConfig: NavigationConfig = {
     },
     {
       name: 'Terms',
+      nameKey: 'navigation.terms',
       href: '/terms',
       icon: TermsIcon,
       public: true,

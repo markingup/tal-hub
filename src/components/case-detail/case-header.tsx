@@ -5,10 +5,10 @@ import { ArrowLeft, Edit } from 'lucide-react'
 import type { Case } from '@/lib/supabase/types'
 
 const statusConfig = {
-  draft: { label: 'Draft', color: 'bg-gray-500', textColor: 'text-gray-600' },
-  active: { label: 'Active', color: 'bg-blue-500', textColor: 'text-blue-600' },
-  closed: { label: 'Closed', color: 'bg-green-500', textColor: 'text-green-600' },
-  archived: { label: 'Archived', color: 'bg-gray-400', textColor: 'text-gray-500' },
+  draft: { label: 'Draft', color: 'bg-gray-100', textColor: 'text-text-secondary' },
+  active: { label: 'Active', color: 'bg-primary/10', textColor: 'text-primary' },
+  closed: { label: 'Closed', color: 'bg-green-100', textColor: 'text-success' },
+  archived: { label: 'Archived', color: 'bg-gray-50', textColor: 'text-text-secondary' },
 }
 
 const typeConfig = {
@@ -48,10 +48,10 @@ export function CaseHeader({ caseData }: { caseData: Case }) {
         <div className="space-y-2">
           <h1 className="text-3xl font-bold">{caseData.title}</h1>
           <div className="flex items-center gap-4">
-            <Badge variant="secondary" className={`${statusConfig[caseData.status]?.color || 'bg-gray-500'} ${statusConfig[caseData.status]?.textColor || 'text-gray-600'} border-0`}>
+            <Badge variant="secondary" className={`${statusConfig[caseData.status]?.color || 'bg-gray-100'} ${statusConfig[caseData.status]?.textColor || 'text-text-secondary'} border-0`}>
               {statusConfig[caseData.status]?.label || 'Unknown'}
             </Badge>
-            <span className="text-muted-foreground">
+            <span className="text-text-secondary">
               {typeConfig[caseData.type]}
             </span>
           </div>

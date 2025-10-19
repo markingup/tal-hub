@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useAuth } from '@/components/auth-provider'
+import { useI18n } from '@/components/i18n-provider'
 import { User, LogOut, ChevronDown } from 'lucide-react'
 
 /**
@@ -20,6 +21,7 @@ interface NavbarUserMenuProps {
 
 export function NavbarUserMenu({ className = '' }: NavbarUserMenuProps) {
   const { user, signOut } = useAuth()
+  const { t } = useI18n()
 
   if (!user) {
     return null
@@ -40,7 +42,7 @@ export function NavbarUserMenu({ className = '' }: NavbarUserMenuProps) {
         <DropdownMenuContent align="end" className="w-56">
           <DropdownMenuItem onClick={signOut}>
             <LogOut className="mr-2 h-4 w-4" />
-            Sign Out
+            {t('common.signOut')}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

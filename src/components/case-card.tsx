@@ -28,10 +28,10 @@ interface CaseCardProps {
 }
 
 const statusConfig: Record<CaseStatus, { label: string; color: string; bgColor: string }> = {
-  draft: { label: 'Draft', color: 'text-gray-600', bgColor: 'bg-gray-100' },
-  active: { label: 'Active', color: 'text-blue-600', bgColor: 'bg-blue-100' },
-  closed: { label: 'Closed', color: 'text-green-600', bgColor: 'bg-green-100' },
-  archived: { label: 'Archived', color: 'text-gray-500', bgColor: 'bg-gray-50' },
+  draft: { label: 'Draft', color: 'text-text-secondary', bgColor: 'bg-gray-100' },
+  active: { label: 'Active', color: 'text-primary', bgColor: 'bg-primary/10' },
+  closed: { label: 'Closed', color: 'text-success', bgColor: 'bg-green-100' },
+  archived: { label: 'Archived', color: 'text-text-secondary', bgColor: 'bg-gray-50' },
 }
 
 const typeConfig: Record<CaseType, { label: string; icon: typeof FileText }> = {
@@ -58,7 +58,7 @@ export function CaseCard({ case: caseItem, onView, onEdit }: CaseCardProps) {
   }
 
   return (
-    <Card className="hover:shadow-md transition-shadow duration-200">
+    <Card className="hover:shadow-md hover:scale-105 transition-all duration-[var(--dur-fast)] ease-[var(--ease-standard)]">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1 flex-1 min-w-0">
@@ -76,7 +76,7 @@ export function CaseCard({ case: caseItem, onView, onEdit }: CaseCardProps) {
       
       <CardContent className="pt-0 space-y-3">
         {/* Case Details */}
-        <div className="space-y-2 text-sm text-muted-foreground">
+        <div className="space-y-2 text-sm text-text-secondary">
           {caseItem.opposing_party_name && (
             <div className="flex items-center gap-2">
               <span className="font-medium">Opposing Party:</span>
@@ -99,7 +99,7 @@ export function CaseCard({ case: caseItem, onView, onEdit }: CaseCardProps) {
         </div>
 
         {/* Created Info */}
-        <div className="flex items-center justify-center text-xs text-muted-foreground pt-2 border-t">
+        <div className="flex items-center justify-center text-xs text-text-secondary pt-2 border-t">
           <span>Created: {new Date(caseItem.created_at).toLocaleDateString()}</span>
         </div>
 
